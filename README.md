@@ -52,7 +52,6 @@ allow_anonymous true (2)
 En este punto, el contenido de nuestro directorio de trabajo debe tener los siguientes archivos:
 
 ![](https://raw.githubusercontent.com/joseean29/Practica18-IOT/main/images/mosquitto.PNG)
-)
 
 ## 1.3 Cliente MQTT para publicar en un topic (*publish*)
 En esta sección vamos a explicar cómo podemos hacer uso de un cliente MQTT para publicar mensajes de prueba en el broker MQTT que acabamos de crear.
