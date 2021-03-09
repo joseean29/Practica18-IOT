@@ -1,4 +1,7 @@
 # Practica 18 - Internet Of Things
+
+![](https://raw.githubusercontent.com/joseean29/Practica18-IOT/main/images/diagrama.png)
+
 Necesitaremos una máquina con mínimo 4GB de memoria con los puertos 8888, 3000, y 1883 y 8086 (UDP y TCP)abiertos.
 Necesitaremos tener instalado Docker y Docker Compose para realizar esta práctica, si no lo tenemos hacemos lo siguiente:
 ```
@@ -48,7 +51,8 @@ allow_anonymous true (2)
 
 En este punto, el contenido de nuestro directorio de trabajo debe tener los siguientes archivos:
 
-![]()
+![](![imagen](https://raw.githubusercontent.com/joseean29/Practica18-IOT/main/images/mosquitto.PNG)
+)
 
 ## 1.3 Cliente MQTT para publicar en un topic (*publish*)
 En esta sección vamos a explicar cómo podemos hacer uso de un cliente MQTT para publicar mensajes de prueba en el broker MQTT que acabamos de crear.
@@ -78,7 +82,7 @@ pub \ (2)
 
 En mi caso sería: `sudo docker run --init -it --rm efrecon/mqtt-client pub -h 34.232.80.233 -p 1883 -t "iescelia/aula22/co2" -m 30`
 
-![]()
+![](https://raw.githubusercontent.com/joseean29/Practica18-IOT/main/images/pub.PNG)
 
 ## 1.4 Cliente MQTT para suscribirse a un topic (*subscribe*)
 En esta sección vamos a explicar cómo podemos hacer uso de un cliente MQTT para publicar mensajes de prueba en el broker MQTT que acabamos de crear.
@@ -107,7 +111,7 @@ En mi caso sería:
 sudo docker run --init -it --rm efrecon/mqtt-client sub -h 34.232.80.233 -t "iescelia/aula22/co2"
 ```
 
-![]()
+![](https://raw.githubusercontent.com/joseean29/Practica18-IOT/main/images/sub.PNG)
 
 # 2. Telegraf
 Telegraf es un agente que nos permite recopilar y reportar métricas. Las métricas recogidas se pueden enviar a almacenes de datos, colas de mensajes o servicios como: InfluxDB, Graphite, OpenTSDB, Datadog, Kafka, MQTT, NSQ, entre otros.
@@ -134,7 +138,7 @@ docker run --rm telegraf telegraf config > telegraf.conf
 ```
 Una vez que hemos creado el archivo telegraf.conf lo movemos al directorio telegraf de nuestro proyecto. El contenido de nuestro directorio de trabajo debe tener los siguientes archivos.
 
-![]()
+![](https://raw.githubusercontent.com/joseean29/Practica18-IOT/main/images/telegraf.PNG)
 
 ## 2.3 Configuración del archivo `telegraf.conf` para suscribirnos a un topic MQTT (`inputs.mqtt_consumer`)
 Tendremos que buscar la sección `inputs.mqtt_consumer` dentro del archivo `telegraf.conf` y configurar los siguientes valores:
@@ -145,18 +149,18 @@ Tendremos que buscar la sección `inputs.mqtt_consumer` dentro del archivo `tele
 Existen más directivas de configuración, pero en este proyecto sólo vamos a utilizar los valores que hemos indicado anteriormente.
 
 ### 2.3.1 servers
-![]()
+![](https://raw.githubusercontent.com/joseean29/Practica18-IOT/main/images/servers.PNG)
 
 En esta directiva de configuración indicamos la URL del broker MQTT al que queremos conectarnos. En nuestro caso pondremos el nombre del servicio `mosquitto` que es como lo hemos definido en nuestro archivo `docker-compose.yml`.
 
 
 ### 2.3.2 topics
-![]()
+![](https://raw.githubusercontent.com/joseean29/Practica18-IOT/main/images/topics.PNG)
 
 En esta directiva indicamos los topics a los que queremos suscribirnos. En nuestro caso pondremos el topic `iescelia/#`. El carácter `#` al final del topic indica que nos vamos a suscribir a cualquier topic que exista después de la cadena `iescelia/`.
 
 ### 2.3.3 data_format
-![]()
+![](https://raw.githubusercontent.com/joseean29/Practica18-IOT/main/images/format.PNG)
 
 En esta directiva indicamos cómo es el formato de los datos que vamos a recibir por MQTT.
 
@@ -339,6 +343,8 @@ grafana: (1)
       - influxdb
 ```
 
+![](https://raw.githubusercontent.com/joseean29/Practica18-IOT/main/images/grfana1.PNG)
+
 1. Nombre del servicio dentro del archivo `docker-compose.yml.`
 2. Utilizamos la imagen Docker grafana.
 3. Este servicio utilizará el puerto `3000` de nuestra máquina local para enlazarlo con el puerto `3000` el contenedor.
@@ -358,13 +364,13 @@ Para crear un data source debe seguir los siguientes pasos:
 4. Seleccione InfluxDB en el desplegable donde se indica el tipo de data source.
 5. Configure los parámetros url, database, user y password de su servicio InfluxDB.
 
-![]()
+![](https://raw.githubusercontent.com/joseean29/Practica18-IOT/main/images/datasource.PNG)
 
 ### 4.2.2 Configuración con aprovisionamiento automático
 Es posible configurar Grafana para que utilize un archivo de configuración de forma automática para evitar tener que realizar la configuración de forma manual.
 
 En nuestro proyecto, vamos a crear un archivo con el nombre `datasource.yml` dentro de la siguiente estructura de directorios:
-![]()
+![](https://raw.githubusercontent.com/joseean29/Practica18-IOT/main/images/grafanaestruc.PNG)
 
 El contenido del archivo `datasource.yml` será el siguiente:
 ```
@@ -409,7 +415,7 @@ grafana: (1)
 ## 4.3 Configuración de un dashboard
 A continuación se muestra una imagen de cómo se podría configurar un dashboard para Grafana.
 
-![]()
+![](https://raw.githubusercontent.com/joseean29/Practica18-IOT/main/images/grafana.PNG)
 
 # 5. Mi sitio
 **[URL DEL SITIO](http://34.232.80.233:3000)**  
